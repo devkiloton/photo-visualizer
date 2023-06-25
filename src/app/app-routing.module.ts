@@ -5,6 +5,8 @@ import { PhotoFormComponent } from './photo-form/photo-form.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PhotoListResolver } from './resolvers/photo-list.resolver';
 import { AuthGuard } from './guards/auth.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RequestInterceptor } from './interceptors/request.interceptor';
 
 const routes: Routes = [
   {
@@ -47,6 +49,11 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: RequestInterceptor,
+    multi: true
+  }]
 })
 export class AppRoutingModule { }
