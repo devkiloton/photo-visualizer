@@ -1,7 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PhotoListComponent } from './photo-list/photo-list.component';
+import { PhotoFormComponent } from './photo-form/photo-form.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { PhotoListResolver } from './resolvers/photo-list.resolver';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+  path: 'user/:userName',
+  component: PhotoListComponent,
+  // The component will be rendered only after the data is resolved
+  resolve: {
+    photos: PhotoListResolver
+  }
+  },
+  {
+    path: 'p/add',
+    component: PhotoFormComponent,
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
