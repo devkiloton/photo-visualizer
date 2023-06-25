@@ -1,0 +1,97 @@
+<h4 class="text-center">Register to embrace a new world!</h4>
+
+<form [formGroup]="signUpForm" class="form mt-4">
+  <div class="form-group">
+    <input
+      [formControl]="signUpForm.controls.email"
+      placeholder="email"
+      class="form-control"
+      autofocus
+    />
+    <app-form-error-message
+      *ngIf="signUpForm.controls.email.errors?.['required']"
+      [text]="'Email is required!'"
+    ></app-form-error-message>
+    <app-form-error-message
+      *ngIf="signUpForm.controls.email.errors?.['email']"
+      [text]="'Email invalid!'"
+    ></app-form-error-message>
+  </div>
+
+  <div class="form-group">
+    <input
+      [formControl]="signUpForm.controls.fullName"
+      placeholder="full name"
+      class="form-control"
+    />
+    <app-form-error-message
+      *ngIf="signUpForm.controls.fullName.errors?.['required']"
+      [text]="'Full name is required!'"
+    ></app-form-error-message>
+    <app-form-error-message
+      *ngIf="signUpForm.controls.fullName.errors?.['minlength']"
+      [text]="'Full name must have at least 2 characters!'"
+    ></app-form-error-message>
+    <app-form-error-message
+      *ngIf="signUpForm.controls.fullName.errors?.['maxlength']"
+      [text]="'Full name must have a maximum of 255 characters!'"
+    ></app-form-error-message>
+  </div>
+
+  <div class="form-group">
+    <input
+      [formControl]="signUpForm.controls.userName"
+      placeholder="user name"
+      class="form-control"
+    />
+    <app-form-error-message
+      *ngIf="signUpForm.controls.userName.errors?.['required']"
+      [text]="'User name is required!'"
+    ></app-form-error-message>
+    <app-form-error-message
+      *ngIf="signUpForm.controls.userName.errors?.['minlength']"
+      [text]="'User name must have at least 2 characters!'"
+    ></app-form-error-message>
+    <app-form-error-message
+      *ngIf="signUpForm.controls.userName.errors?.['maxlength']"
+      [text]="'User name must have a maximum of 255 characters!'"
+    ></app-form-error-message>
+    <app-form-error-message
+      *ngIf="signUpForm.controls.userName.errors?.['lowerCase']"
+      [text]="
+        'User name must have only letters, numbers, hyphens and underscores!'
+      "
+    ></app-form-error-message>
+    <app-form-error-message
+      *ngIf="signUpForm.controls.userName.errors?.['userNameTaken']"
+      [text]="'User name is already taken! Please choose another one.'"
+    ></app-form-error-message>
+  </div>
+
+  <div class="form-group">
+    <input
+      [formControl]="signUpForm.controls.password"
+      type="password"
+      placeholder="password"
+      class="form-control"
+    />
+    <app-form-error-message
+      *ngIf="signUpForm.controls.password.errors?.['required']"
+      [text]="'Password is required!'"
+    ></app-form-error-message>
+    <app-form-error-message
+      *ngIf="signUpForm.controls.password.errors?.['minlength']"
+      [text]="'Password must have at least 8 characters!'"
+    ></app-form-error-message>
+    <app-form-error-message
+      *ngIf="signUpForm.controls.password.errors?.['maxlength']"
+      [text]="'Password must have a maximum of 14 characters!'"
+    ></app-form-error-message>
+  </div>
+
+  <button [disabled]="signUpForm.invalid" class="btn btn-primary btn-block">
+    Register
+  </button>
+
+  <p>Already a user?<a [routerLink]="['']">Sign In!</a></p>
+</form>
