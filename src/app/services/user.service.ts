@@ -36,4 +36,12 @@ export class UserService {
     this.tokenService.removeToken();
     this.userSubject.next(null!);
   }
+
+  isLogged(): boolean {
+    return this.tokenService.hasToken();
+  }
+
+  getUserName(): string {
+    return this.userSubject.value.name;
+  }
 }
