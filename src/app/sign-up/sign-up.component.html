@@ -1,6 +1,6 @@
 <h4 class="text-center">Register to embrace a new world!</h4>
 
-<form [formGroup]="signUpForm" class="form mt-4">
+<form [formGroup]="signUpForm" class="form mt-4" (ngSubmit)="signup()">
   <div class="form-group">
     <input
       [formControl]="signUpForm.controls.email"
