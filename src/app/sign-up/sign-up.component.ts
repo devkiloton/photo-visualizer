@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { FormErrorMessageComponent } from '../form-error-message/form-error-message.component';
@@ -21,13 +21,16 @@ export class SignUpComponent implements AfterViewInit {
   userNotTakenValidatorService = inject(UserNotTakenValidatorService)
   signUpService = inject(SignUpService)
   router = inject(Router)
+  renderer = inject(Renderer2)
   platformDetectorService = inject(PlatformDetectorService)
 
   // Performant way to access the DOM element with the #userNameInput template variable 
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
 
   ngAfterViewInit(): void {
-    this.platformDetectorService.isPlatformBrowser() && this.emailInput.nativeElement.focus();
+    // Macete antigo
+    // this.platformDetectorService.isPlatformBrowser() && this.emailInput.nativeElement.focus();
+    this.renderer.selectRootElement(this.emailInput.nativeElement).focus();
   }
 
   signUpForm = this.fb.group({

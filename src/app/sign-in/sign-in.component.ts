@@ -16,6 +16,7 @@ export class SignInComponent implements AfterViewInit{
   fb = inject(NonNullableFormBuilder)
   authService = inject(AuthService)
   router = inject(Router)
+  renderer = inject(Renderer2)
   platformDetectorService = inject(PlatformDetectorService)
   // Performant way to access the DOM element with the #userNameInput template variable 
   @ViewChild('userNameInput') userNameInput!: ElementRef<HTMLInputElement>;
@@ -26,7 +27,7 @@ export class SignInComponent implements AfterViewInit{
   });
 
   public ngAfterViewInit(): void {
-    this.platformDetectorService.isPlatformBrowser() && this.userNameInput.nativeElement.focus();
+    this.renderer.selectRootElement(this.userNameInput.nativeElement).focus();
   }
 
   login() {
@@ -41,8 +42,10 @@ export class SignInComponent implements AfterViewInit{
         error: err => {
           console.log(err);
           this.loginForm.reset();
-          // Pulo do gato: métodos não são acesiveis ao renderer, esse é o macete!
-          this.platformDetectorService.isPlatformBrowser() && this.userNameInput.nativeElement.focus();
+          // antigo Pulo do gato: métodos não são acesiveis ao renderer, esse é o macete!
+          // this.platformDetectorService.isPlatformBrowser() && this.userNameInput.nativeElement.focus();
+          this.renderer.selectRootElement(this.userNameInput.nativeElement).focus();
+
           alert('Invalid user name or password');
         }
       });
