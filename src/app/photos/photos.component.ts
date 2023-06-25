@@ -4,7 +4,7 @@ import { PhotoComponent } from '../photo/photo.component';
 import { NgFor, NgIf } from '@angular/common';
 import { isNil } from 'lodash';
 import { CardComponent } from '../shared/components/card/card.component';
-import { DarkenOnHoverDirective } from '../darken-on-hover.directive';
+import { DarkenOnHoverDirective } from '../directives/darken-on-hover.directive'; 
 
 @Component({
   selector: 'app-photos',
