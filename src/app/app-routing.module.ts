@@ -4,28 +4,29 @@ import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoFormComponent } from './photo-form/photo-form.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PhotoListResolver } from './resolvers/photo-list.resolver';
-import { SignInComponent } from './sign-in/sign-in.component';
 import { AuthGuard } from './guards/auth.guard';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    pathMatch: 'full',
+    redirectTo: 'home'
+  },
+  {
+    path: 'home',
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
     canActivate: [AuthGuard],
     children:[
       {
         path: '',
-        component: SignInComponent
+        loadComponent: () => import('./sign-in/sign-in.component').then(m => m.SignInComponent),
       },
       {
         path: 'signup',
-        component: SignUpComponent
+        loadComponent: () => import('./sign-up/sign-up.component').then(m => m.SignUpComponent),
       }
     ]
   },
-  
   {
   path: 'user/:userName',
   component: PhotoListComponent,
