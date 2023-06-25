@@ -14,6 +14,7 @@ import { PlatformDetectorService } from '../services/platform-detector.service';
   styleUrls: ['./sign-up.component.scss'],
   standalone: true,
   imports:[RouterModule, ReactiveFormsModule, FormErrorMessageComponent, NgIf],
+  providers: [UserNotTakenValidatorService]
 })
 export class SignUpComponent implements AfterViewInit {
 

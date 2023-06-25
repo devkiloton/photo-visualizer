@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { NewUser } from '../types/newUser';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SignUpService {
 
   http = inject(HttpClient)
