@@ -3,6 +3,7 @@
 <form [formGroup]="signUpForm" class="form mt-4" (ngSubmit)="signup()">
   <div class="form-group">
     <input
+      #emailInput
       [formControl]="signUpForm.controls.email"
       placeholder="email"
       class="form-control"

@@ -1,18 +1,18 @@
 import { NgIf } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorMessageComponent } from '../form-error-message/form-error-message.component';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { PlatformDetectorService } from '../services/platform-detector.service';
 
 @Component({
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, FormErrorMessageComponent]
+  imports: [ReactiveFormsModule, NgIf, FormErrorMessageComponent, RouterModule]
 })
-export class SignInComponent{
+export class SignInComponent implements AfterViewInit{
   fb = inject(NonNullableFormBuilder)
   authService = inject(AuthService)
   router = inject(Router)
@@ -24,6 +24,10 @@ export class SignInComponent{
     userName: ['', Validators.required],
     password: ['', Validators.required]
   });
+
+  public ngAfterViewInit(): void {
+    this.platformDetectorService.isPlatformBrowser() && this.userNameInput.nativeElement.focus();
+  }
 
   login() {
     if(this.loginForm.invalid) return;
