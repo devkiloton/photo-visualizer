@@ -7,6 +7,7 @@ import { PhotoListResolver } from './resolvers/photo-list.resolver';
 import { AuthGuard } from './guards/auth.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './interceptors/request.interceptor';
+import { RequireAuthGuard } from './guards/require-auth.guard';
 
 const routes: Routes = [
   {
@@ -40,6 +41,7 @@ const routes: Routes = [
   {
     path: 'p/add',
     component: PhotoFormComponent,
+    canActivate: [RequireAuthGuard]
   },
   {
     path: '**',
