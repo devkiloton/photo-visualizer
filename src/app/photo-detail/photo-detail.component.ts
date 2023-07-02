@@ -8,6 +8,8 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { PhotoComment } from '../types/photo-comment';
 import { PhotoCommentsComponent } from '../photo-comments/photo-comments.component';
 import { PhotoOwnerOnlyDirective } from '../directives/photo-owner-only.directive';
+import { AlertService } from '../services/alert.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-photo-detail',
@@ -22,6 +24,8 @@ export class PhotoDetailComponent implements OnInit {
   routeActivated = inject(ActivatedRoute)
   photoService = inject(PhotoService)
   router = inject(Router)
+  alertService = inject(AlertService)
+  userservice = inject(UserService)
 
   photo$!: Observable<Photo>;
   comment$!: Observable<PhotoComment[]>;
@@ -34,8 +38,15 @@ export class PhotoDetailComponent implements OnInit {
   }
 
   public remove(){
-    this.photoService.removePhoto(this.photoID).subscribe(() => {
-      this.router.navigate([''])
+    this.photoService.removePhoto(this.photoID).subscribe({
+      next: () => {
+      this.alertService.success('Photo removed', true)
+      this.router.navigate(['/user', this.userservice.getUserName()])
+    },
+      error: err => {
+        console.log(err)
+        this.alertService.danger('Could not delete the photo', true)
+      }
     })
   }
 

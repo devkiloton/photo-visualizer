@@ -6,6 +6,8 @@ import { PhotoService } from '../services/photo.service';
 import { Router } from '@angular/router';
 import { PhotoComponent } from '../photo/photo.component';
 import { ImmediateClickDirective } from '../directives/immediate-click.directive';
+import { AlertService } from '../services/alert.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-photo-form',
@@ -19,9 +21,10 @@ export class PhotoFormComponent {
   fb = inject(NonNullableFormBuilder)
   photoService = inject(PhotoService)
   router = inject(Router)
-
+  alertService = inject(AlertService)
   file:any;
   preview: string='';
+  userservice = inject(UserService)
 
   photoForm = this.fb.group({
     file: ['', Validators.required],
@@ -32,7 +35,15 @@ export class PhotoFormComponent {
   upload(){
     const description = this.photoForm.get('description')?.value as string;
     const allowComments = this.photoForm.get('allowComments')?.value as boolean;
-    this.photoService.upload(description, allowComments, this.file).subscribe(() => this.router.navigate(['']))
+    this.photoService.upload(description, allowComments, this.file).subscribe({
+      next: () => {
+        this.alertService.success('Upload complete', true)
+        this.router.navigate(['/user', this.userservice.getUserName()])
+      },
+      error: err => {
+        this.alertService.danger('Upload error', true)
+      }
+    })
   }
 
   handleFile(file: File){

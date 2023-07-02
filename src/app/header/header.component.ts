@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { User } from '../types/user';
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports:[NgIf, AsyncPipe, RouterModule],
+  imports:[NgIf, AsyncPipe, RouterModule, AlertComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {

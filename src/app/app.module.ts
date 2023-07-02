@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ImmediateClickDirective } from './directives/immediate-click.directive';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { PhotoCommentsComponent } from './photo-comments/photo-comments.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
