@@ -35,6 +35,10 @@ export class PhotoDetailComponent implements OnInit {
     this.photoID= this.routeActivated.snapshot.params['photoID'] as number;
     this.photo$ = this.photoService.findById(this.photoID)
     this.comment$ = this.photoService.getComments(this.photoID)
+    this.photo$.subscribe({ error: err => {
+      console.log(err)
+      this.router.navigate(['not-found'])
+    }})
   }
 
   public remove(){

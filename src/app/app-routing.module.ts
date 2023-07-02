@@ -50,8 +50,12 @@ const routes: Routes = [
     canActivate: [RequireAuthGuard]
   },
   {
-    path: '**',
+    path: 'not-found',
     component: NotFoundComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
   }
 ];
 
