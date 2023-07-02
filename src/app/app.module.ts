@@ -9,12 +9,12 @@ import { RequestInterceptor } from './interceptors/request.interceptor';
 import { FooterComponent } from './footer/footer.component';
 import { ImmediateClickDirective } from './directives/immediate-click.directive';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
+import { PhotoCommentsComponent } from './photo-comments/photo-comments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    PhotoDetailComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,

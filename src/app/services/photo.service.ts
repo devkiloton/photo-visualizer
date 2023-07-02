@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Photo } from '../types/photo';
+import { PhotoComment } from '../types/photo-comment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,10 @@ export class PhotoService {
     formData.append('imageFile', file);
     return this.http.post('http://localhost:3000/photos/upload', formData, { observe: 'events', reportProgress: true })
   }
-
+  public findById = (photoId: number) => this.http.get<Photo>(`http://localhost:3000/photos/${photoId}`)
+  public getComments = (photoId: number) => this.http.get<PhotoComment[]>(`http://localhost:3000/photos/${photoId}/comments`)
+  public addComment = (photoId: number, commentText: string) => {
+    return this.http.post(`http://localhost:3000/photos/${photoId}/comments`, { commentText })
+  }
+  public removePhoto = (photoId: number) => this.http.delete(`http://localhost:3000/photos/${photoId}`)
 }

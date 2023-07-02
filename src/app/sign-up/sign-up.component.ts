@@ -37,7 +37,11 @@ export class SignUpComponent implements AfterViewInit {
   signUpForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     fullName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
-    userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(255), lowerCaseValidator], this.userNotTakenValidatorService.checkUserNameTaken()],
+    userName: [
+      '', 
+    [Validators.required, Validators.minLength(2), Validators.maxLength(255), lowerCaseValidator],
+     this.userNotTakenValidatorService.checkUserNameTaken()
+    ],
     password: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(14)]]
   })
   

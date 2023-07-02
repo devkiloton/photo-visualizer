@@ -5,13 +5,14 @@ import { NgFor, NgIf } from '@angular/common';
 import { isNil } from 'lodash';
 import { CardComponent } from '../shared/components/card/card.component';
 import { DarkenOnHoverDirective } from '../directives/darken-on-hover.directive'; 
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-photos',
   templateUrl: './photos.component.html',
   styleUrls: ['./photos.component.scss'],
   standalone: true,
-  imports:[PhotoComponent, NgFor, NgIf, CardComponent, DarkenOnHoverDirective]
+  imports:[PhotoComponent, NgFor, NgIf, CardComponent, DarkenOnHoverDirective, RouterModule]
 })
 export class PhotosComponent implements OnChanges{
 @Input() photos: Photo[] = [];

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 
 const CLOUD = 'http://localhost:3000/imgs/';
@@ -6,6 +7,7 @@ const CLOUD = 'http://localhost:3000/imgs/';
   selector: 'app-photo',
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.scss'],
+  imports:[RouterModule],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

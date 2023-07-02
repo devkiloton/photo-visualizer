@@ -25,9 +25,10 @@ export class PhotoListComponent implements OnInit {
   userName = '';
 
   public ngOnInit(): void {
-    this.userName = this.activatedRoute.snapshot.params['userName'];
-    // Taking the data from the resolver and passing it to the component
-    this.photos = this.activatedRoute.snapshot.data['photos'];
+    this.activatedRoute.params.subscribe(params => {
+      this.userName = params['userName'];
+      this.photos = this.activatedRoute.snapshot.data['photos'];
+    })
   }
 
 
