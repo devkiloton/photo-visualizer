@@ -6,13 +6,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorMessageComponent } from '../form-error-message/form-error-message.component';
+import { ShowIfLoggedDirective } from '../directives/show-if-logged.directive';
 
 @Component({
   selector: 'app-photo-comments',
   templateUrl: './photo-comments.component.html',
   styleUrls: ['./photo-comments.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, FormErrorMessageComponent],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, FormErrorMessageComponent, ShowIfLoggedDirective],
   standalone: true
 })
 export class PhotoCommentsComponent implements OnInit {

@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Photo } from '../types/photo';
 import { PhotoComment } from '../types/photo-comment';
+import { catchError, map, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,4 +26,5 @@ export class PhotoService {
     return this.http.post(`http://localhost:3000/photos/${photoId}/comments`, { commentText })
   }
   public removePhoto = (photoId: number) => this.http.delete(`http://localhost:3000/photos/${photoId}`)
+  public like = (photoId: number) => this.http.post(`http://localhost:3000/photos/${photoId}/like`, {}, { observe: 'response' }).pipe(map(res => true)).pipe(catchError(err => err.status == '304' ? of(false) : throwError(()=> new Error(err))))
 }

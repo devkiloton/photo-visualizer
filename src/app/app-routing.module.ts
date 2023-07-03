@@ -18,21 +18,25 @@ const routes: Routes = [
   },
   {
     path: 'home',
+    title: 'Home',
     loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
     canActivate: [AuthGuard],
     children:[
       {
         path: '',
         loadComponent: () => import('./sign-in/sign-in.component').then(m => m.SignInComponent),
+        title: 'Sign in'
       },
       {
         path: 'signup',
         loadComponent: () => import('./sign-up/sign-up.component').then(m => m.SignUpComponent),
+        title: 'Sign up'
       }
     ]
   },
   {
   path: 'user/:userName',
+  title: 'Timeline',
   component: PhotoListComponent,
   // The component will be rendered only after the data is resolved
   resolve: {
@@ -41,16 +45,18 @@ const routes: Routes = [
   },
   {
     path: 'p/add',
+    title: 'Photo upload',
     component: PhotoFormComponent,
     canActivate: [RequireAuthGuard]
   },
   {
     path: 'p/:photoID',
+    title: 'Photo detail',
     component: PhotoDetailComponent,
-    canActivate: [RequireAuthGuard]
   },
   {
     path: 'not-found',
+    title: 'Not found',
     component: NotFoundComponent,
   },
   {

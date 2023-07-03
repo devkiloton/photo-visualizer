@@ -10,14 +10,14 @@ import { PhotoCommentsComponent } from '../photo-comments/photo-comments.compone
 import { PhotoOwnerOnlyDirective } from '../directives/photo-owner-only.directive';
 import { AlertService } from '../services/alert.service';
 import { UserService } from '../services/user.service';
+import { ShowIfLoggedDirective } from '../directives/show-if-logged.directive';
 
 @Component({
   selector: 'app-photo-detail',
   templateUrl: './photo-detail.component.html',
   styleUrls: ['./photo-detail.component.scss'],
-  imports: [NgIf,AsyncPipe , PhotoComponent, PhotoCommentsComponent, PhotoOwnerOnlyDirective],
+  imports: [NgIf,AsyncPipe , PhotoComponent, PhotoCommentsComponent, PhotoOwnerOnlyDirective, ShowIfLoggedDirective],
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoDetailComponent implements OnInit {
 
@@ -50,6 +50,14 @@ export class PhotoDetailComponent implements OnInit {
       error: err => {
         console.log(err)
         this.alertService.danger('Could not delete the photo', true)
+      }
+    })
+  }
+
+  public like(photo: Photo){
+    this.photoService.like(photo.id).subscribe(liked => {
+      if(liked){
+        this.photo$ = this.photoService.findById(photo.id)
       }
     })
   }
