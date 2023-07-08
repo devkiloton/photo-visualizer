@@ -15,7 +15,7 @@
       autofocus
     />
     <app-form-error-message
-      *ngIf="signUpForm.controls.email.errors?.['required'] && form.submitted"
+      *ngIf="signUpForm.controls.email.errors?.['required'] && (form.submitted || signUpForm.controls.email.touched)"
       [text]="'Email is required!'"
     ></app-form-error-message>
     <app-form-error-message
