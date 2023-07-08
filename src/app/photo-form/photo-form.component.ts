@@ -31,7 +31,7 @@ export class PhotoFormComponent {
 
   photoForm = this.fb.group({
     file: ['', Validators.required],
-    description: ['', Validators.required, Validators.maxLength(300)],
+    description: ['', [Validators.required, Validators.maxLength(300)]],
     allowComments: [true]
   })
 

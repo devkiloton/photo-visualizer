@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { RequireAuthGuard } from './guards/require-auth.guard';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,12 @@ const routes: Routes = [
     title: 'Not found',
     component: NotFoundComponent,
   },
+  {
+    path: 'error',
+    title: 'Error',
+    component: ErrorComponent,
+  }
+  ,
   {
     path: '**',
     redirectTo: 'not-found',

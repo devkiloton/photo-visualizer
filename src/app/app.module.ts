@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,11 +13,14 @@ import { PhotoCommentsComponent } from './photo-comments/photo-comments.componen
 import { AlertComponent } from './alert/alert.component';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { GlobalErrorHandler } from './errors/global-error-handler';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,10 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
       multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler
     }
 ],
   bootstrap: [AppComponent]
