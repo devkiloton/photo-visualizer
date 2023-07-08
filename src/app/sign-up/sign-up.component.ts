@@ -45,9 +45,11 @@ export class SignUpComponent implements AfterViewInit {
     password: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(14)]]
   })
   
-  signup(){
-    const newUser = this.signUpForm.getRawValue() as NewUser;
-    return this.signUpService.signUp(newUser).subscribe(() => this.router.navigate(['']))
+  signup():void {
+    if(this.signUpForm.valid && !this.signUpForm.pending){
+      const newUser = this.signUpForm.getRawValue() as NewUser;
+      this.signUpService.signUp(newUser).subscribe(() => this.router.navigate(['']))
+    }
   }
 
 }
