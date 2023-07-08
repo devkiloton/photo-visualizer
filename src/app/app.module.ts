@@ -11,11 +11,13 @@ import { ImmediateClickDirective } from './directives/immediate-click.directive'
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { PhotoCommentsComponent } from './photo-comments/photo-comments.component';
 import { AlertComponent } from './alert/alert.component';
+import { LoadingComponent } from './loading/loading.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,18 @@ import { AlertComponent } from './alert/alert.component';
     HttpClientModule,
     HeaderComponent
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

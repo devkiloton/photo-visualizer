@@ -5,13 +5,14 @@ import { User } from '../types/user';
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AlertComponent } from '../alert/alert.component';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports:[NgIf, AsyncPipe, RouterModule, AlertComponent],
+  imports:[NgIf, AsyncPipe, RouterModule, AlertComponent, LoadingComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {

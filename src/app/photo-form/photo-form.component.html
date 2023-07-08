@@ -56,16 +56,26 @@
           />
         </label>
       </div>
+      <div *ngIf="!percentDone; else uploadElement">
+        <button
+          [disabled]="photoForm.invalid"
+          type="submit"
+          class="btn btn-primary btn-block"
+        >
+          Upload
+        </button>
 
-      <button
-        [disabled]="photoForm.invalid"
-        type="submit"
-        class="btn btn-primary btn-block"
-      >
-        Upload
-      </button>
-
-      <a class="btn btn-secondary btn-block">Cancel</a>
+        <a [routerLink]="['']" class="btn btn-secondary btn-block">Cancel</a>
+      </div>
+      <ng-template #uploadElement>
+        <div class="progress">
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar"
+            [style.width.%]="percentDone"
+          ></div>
+        </div>
+      </ng-template>
     </div>
   </form>
 </div>
